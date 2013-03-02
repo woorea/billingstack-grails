@@ -19,6 +19,12 @@ class UrlMappings {
 		"/currencies/$currencyId"(controller : "currencies"){
 			action = [GET : "show", DELETE : "delete", PUT : "update"]
 		}
+		"/invoice-states"(controller : "invoiceStates"){
+			action = [GET : "list", POST : "create"]
+		}
+		"/invoice-states/$invoiceStateId"(controller : "invoiceStates"){
+			action = [GET : "show", DELETE : "delete", PUT : "update"]
+		}
 		"/payment-gateway-providers"(controller : "paymentGatewayProviders"){
 			action = [GET : "list", POST : "create"]
 		}

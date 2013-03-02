@@ -47,6 +47,7 @@ class TestController {
 			def customerAdmin = rolesService.create([name : 'customer_admin'])
 			def en = languagesService.create([name : 'en'])
 			def usd = currenciesService.create([name : 'usd'])
+			def status = invoiceStatesService.create([name : 'pending'])
 			def braintreeProvider = paymentGatewayProvidersService.create([
 				name : "braintree",
 				title : "Braintree Payments",

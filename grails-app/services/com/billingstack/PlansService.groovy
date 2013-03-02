@@ -1,11 +1,13 @@
 package com.billingstack
 
 class PlansService {
+	
+	def planItemsService
 
 	def map(plan) {
 		[
 			id : plan.id,
-			merchant : plan.merchant.id,
+			merchant_id : plan.merchant.id,
 			name : plan.name,
 			title : plan.title,
 			description : plan.description
@@ -22,8 +24,11 @@ class PlansService {
 			name : entity.name,
 			title : entity.title,
 			description : entity.description
-		)
-		map(plan.save())
+		).save(flush : true, failOnError : true)
+		entity.items.each {
+			planItemsService.create(plan.id, it)
+		}
+		map(plan)
 	}
 
 	def show(String planId) {

@@ -7,6 +7,10 @@ class Plan extends BillingStackEntity {
 	String title
 	
 	String description
+	
+	static hasMany = [
+		items : PlanItem
+	]
 
 	static belongsTo = [
 		merchant : Merchant

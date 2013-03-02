@@ -13,7 +13,6 @@ class PaymentGatewayProvidersService {
 	}
 
 	def create(entity) {
-		println entity
 		def paymentGatewayProvider = PaymentGatewayProvider.newInstance(
 			name : entity.name,
 			title : entity.title,

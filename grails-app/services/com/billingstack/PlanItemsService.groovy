@@ -7,8 +7,8 @@ class PlanItemsService {
 	def map(planItem) {
 		def entity = [
 			id : planItem.id,
-			plan : planItem.plan.id,
-			product : planItem.product.id,
+			plan_id : planItem.plan.id,
+			product_id : planItem.product.id,
 		]
 		if(planItem instanceof FixedPricingPlanItem) {
 			entity.type = "fixed"
@@ -33,25 +33,24 @@ class PlanItemsService {
 		if("fixed".equals(entity.type)) {
 			planItem = FixedPricingPlanItem.newInstance(
 				plan : Plan.load(planId),
-				product : Product.load(entity.product.id),
+				product : Product.load(entity.product_id),
 				price : entity.price
 			)
-			map(planItem.save(failOnError : true))
+			map(planItem.save(flush : true, failOnError : true))
 		} else if("volume".equals(entity.type)) {
 			planItem = VolumePricingPlanItem.newInstance(
 				plan : Plan.load(planId),
-				product : Product.load(entity.product.id),
+				product : Product.load(entity.product_id),
 			)
-			println planItem.save(flush : true, failOnError : true).id
+			planItem.save(flush : true, failOnError : true).id
 			entity.pricing.each { range ->
-				println planItem.id
 				pricingService.create(planItem.id, range)
 			}
 			map(planItem)
 		} else if("time".equals(entity.type)) {
 			planItem = TimePricingPlanItem.newInstance(
 				plan : Plan.load(planId),
-				product : Product.load(entity.product.id),
+				product : Product.load(entity.product_id),
 			)
 			planItem.save(flush : true, failOnError : true)
 			entity.pricing.each { range ->

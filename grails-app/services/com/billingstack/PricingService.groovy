@@ -22,8 +22,6 @@ class PricingService {
 		
 		def pricing
 		
-		println planItem.class
-		
 		if(planItem instanceof VolumePricingPlanItem) {
 			pricing = VolumeRangePricing.newInstance(
 				item : planItem,

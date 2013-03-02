@@ -13,7 +13,7 @@ class Invoice extends BillingStackEntity {
 	BigDecimal taxTotal
 	BigDecimal total
 	
-	String status
+	InvoiceState state
 	
 	Currency currency
 	
@@ -35,7 +35,7 @@ class Invoice extends BillingStackEntity {
 		taxPercentage()
 		taxTotal()
 		total()
-		status()
+		state()
 		currency()
 		transaction(nullable : true)
 	}
