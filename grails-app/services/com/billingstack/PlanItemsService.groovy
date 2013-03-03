@@ -7,7 +7,6 @@ class PlanItemsService {
 	def map(planItem) {
 		def entity = [
 			id : planItem.id,
-			plan_id : planItem.plan.id,
 			product_id : planItem.product.id,
 		]
 		if(planItem instanceof FixedPricingPlanItem) {

@@ -5,7 +5,6 @@ class PricingService {
 	def map(pricing) {
 		[
 			id : pricing.id,
-			plan_item : pricing.item.id,
 			start : pricing.start,
 			end : pricing.end,
 			price : pricing.price

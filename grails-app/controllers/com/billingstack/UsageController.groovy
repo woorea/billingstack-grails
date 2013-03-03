@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class UsageController {
 
-		def usagesService
+		def usageService
 
 		def list() {
 			try {
@@ -14,9 +14,9 @@ class UsageController {
 			}
 		}
 
-		def create() {
+		def create(String subscriptionId) {
 			try {
-				render usagesService.create(params.subscriptionId, request.JSON) as JSON
+				render usageService.create(subscriptionId, request.JSON) as JSON
 			} catch(e) {
 				render onError(e) as JSON
 			}

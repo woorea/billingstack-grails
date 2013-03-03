@@ -5,7 +5,11 @@ class UsageService {
 	def map(usage) {
 		[
 			id : usage.id,
-			subscription : usage.subscription.id
+			subscription_id : usage.subscription.id,
+			product_id : usage.product.id,
+			volume : usage.volume,
+			start : usage.start,
+			end : usage.end
 		]
 	}
 
@@ -15,9 +19,13 @@ class UsageService {
 
 	def create(subscriptionId, entity) {
 		def usage = Usage.newInstance(
-			subscription : Subscription.load(subscriptionId)
+			subscription : Subscription.load(subscriptionId),
+			product : Product.load(entity.product_id),
+			volume : entity.volume,
+			start : entity.start,
+			end : entity.end
 		)
-		map(usage.save())
+		map(usage.save(flush : true, failOnError : true))
 	}
 
 	def show(String usageId) {

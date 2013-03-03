@@ -5,7 +5,7 @@ class ProductsService {
 	def map(product) {
 		[
 			id : product.id,
-			merchant : product.merchant.id,
+			merchant_id : product.merchant.id,
 			name : product.name,
 			title : product.title,
 			description : product.description,

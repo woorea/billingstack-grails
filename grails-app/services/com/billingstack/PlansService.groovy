@@ -5,13 +5,17 @@ class PlansService {
 	def planItemsService
 
 	def map(plan) {
-		[
+		def entity = [
 			id : plan.id,
 			merchant_id : plan.merchant.id,
 			name : plan.name,
 			title : plan.title,
 			description : plan.description
 		]
+		entity.items = plan.items.collect {
+			planItemsService.map(it)
+		}
+		entity
 	}
 
 	def list() {
