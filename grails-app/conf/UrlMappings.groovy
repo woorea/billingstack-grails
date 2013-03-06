@@ -68,10 +68,10 @@ class UrlMappings {
 			action = [GET : "show", DELETE : "delete", PUT : "update"]
 		}
 		"/merchants/$merchantId/plans/$planId/items"(controller : "planItems"){
-			action = [GET : "list", POST : "create"]
+			action = [GET : "list"]
 		}
-		"/merchants/$merchantId/plans/$planId/items/$planItemId"(controller : "planItems"){
-			action = [GET : "show", DELETE : "delete", PUT : "update"]
+		"/merchants/$merchantId/plans/$planId/items/$productId"(controller : "planItems"){
+			action = [GET : "show", DELETE : "delete", PUT : "create", PATCH : "update"]
 		}
 		"/merchants/$merchantId/plans/$planId/items/$planItemId/ranges"(controller : "ranges"){
 			action = [GET : "list", POST : "create"]

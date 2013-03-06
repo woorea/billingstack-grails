@@ -1,10 +1,13 @@
 package com.billingstack
 
+import grails.converters.JSON
+
 class PaymentGatewayProvidersService {
 	
 	def map(paymentGatewayProvider) {
 		[
-			id : paymentGatewayProvider.id
+			id : paymentGatewayProvider.id,
+			properties : JSON.parse(paymentGatewayProvider.metadataJson)
 		]
 	}
 
@@ -13,10 +16,12 @@ class PaymentGatewayProvidersService {
 	}
 
 	def create(entity) {
+		
 		def paymentGatewayProvider = PaymentGatewayProvider.newInstance(
 			name : entity.name,
 			title : entity.title,
-			description : entity.description
+			description : entity.description,
+			metadataJson : (entity["properties"] as JSON).toString()
 		)
 		map(paymentGatewayProvider.save(failOnError : true))
 		

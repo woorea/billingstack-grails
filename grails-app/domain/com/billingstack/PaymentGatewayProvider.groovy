@@ -8,14 +8,21 @@ class PaymentGatewayProvider extends BillingStackEntity {
 	
 	String description
 	
+	String metadataJson
+	
 	static hasMany = [
 		methods : PaymentMethod
 	]
+	
+	static mapping = {
+		metadataJson column : 'properties'
+	}
 
 	static constraints = {
 		name()
 		title(nullable : true)
 		description(nullable :true)
+		metadataJson(nullable : true)
 	}
 
 }

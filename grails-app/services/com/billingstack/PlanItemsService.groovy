@@ -7,7 +7,9 @@ class PlanItemsService {
 	def map(planItem) {
 		def entity = [
 			id : planItem.id,
-			product_id : planItem.product.id,
+			name : planItem.product.name,
+			provider : planItem.product.provider,
+			title : planItem.title
 		]
 		if(planItem instanceof FixedPricingPlanItem) {
 			entity.type = "fixed"
@@ -27,19 +29,19 @@ class PlanItemsService {
 		PlanItem.list()
 	}
 
-	def create(planId, entity) {
+	def create(planId, productId, entity) {
 		def planItem
 		if("fixed".equals(entity.type)) {
 			planItem = FixedPricingPlanItem.newInstance(
 				plan : Plan.load(planId),
-				product : Product.load(entity.product_id),
+				product : Product.load(productId),
 				price : entity.price
 			)
 			map(planItem.save(flush : true, failOnError : true))
 		} else if("volume".equals(entity.type)) {
 			planItem = VolumePricingPlanItem.newInstance(
 				plan : Plan.load(planId),
-				product : Product.load(entity.product_id),
+				product : Product.load(productId),
 			)
 			planItem.save(flush : true, failOnError : true).id
 			entity.pricing.each { range ->
@@ -49,7 +51,7 @@ class PlanItemsService {
 		} else if("time".equals(entity.type)) {
 			planItem = TimePricingPlanItem.newInstance(
 				plan : Plan.load(planId),
-				product : Product.load(entity.product_id),
+				product : Product.load(productId),
 			)
 			planItem.save(flush : true, failOnError : true)
 			entity.pricing.each { range ->
@@ -66,8 +68,8 @@ class PlanItemsService {
 		map(PlanItem.get(planItemId))
 	}
 
-	def update(entity) {
-		def planItem = PlanItem.get(entity.id)
+	def update(String planId, String productId, entity) {
+		def planItem = PlanItem.findWhere(['plan.id' : planId, 'product.id' : productId])
 		map(planItem)
 	}
 
