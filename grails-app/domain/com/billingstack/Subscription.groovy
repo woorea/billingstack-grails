@@ -21,7 +21,7 @@ class Subscription extends BillingStackEntity {
 	static constraints = {
 		plan()
 		resource(nullable : true)
-		paymentMethod()
+		paymentMethod(nullable : true)
 		billingDay()
 	}
 

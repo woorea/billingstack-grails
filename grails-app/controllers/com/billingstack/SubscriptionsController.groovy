@@ -14,9 +14,9 @@ class SubscriptionsController {
 			}
 		}
 
-		def create() {
+		def create(String merchantId, String customerId) {
 			try {
-				render subscriptionsService.create(params.customerId, request.JSON) as JSON
+				render subscriptionsService.create(merchantId, customerId, request.JSON) as JSON
 			} catch(e) {
 				render onError(e) as JSON
 			}
@@ -32,7 +32,7 @@ class SubscriptionsController {
 
 		def update(String merchantId, String customerId, String subscriptionId) {
 			try {
-				render subscriptionsService.update(request.JSON) as JSON
+				render subscriptionsService.update(merchantId, customerId, subscriptionId, request.JSON) as JSON
 			} catch(e) {
 				render onError(e) as JSON
 			}

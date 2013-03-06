@@ -2,23 +2,26 @@ package com.billingstack
 
 class Product extends BillingStackEntity {
 	
+	String provider
+	
+	String source
+	
 	String name
 	
 	String title
 	
 	String description
 	
-	String provider
-	
 	static belongsTo = [
 		merchant : Merchant
 	]
 
 	static constraints = {
+		provider(nullable : true)
+		source(nullable : true)
 		name()
 		title(nullable : true)
 		description(nullable : true)
-		provider(nullable : true)
 	}
 
 }

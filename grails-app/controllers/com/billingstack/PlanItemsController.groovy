@@ -31,7 +31,6 @@ class PlanItemsController {
 		}
 
 		def update(String planId, String productId) {
-			println "******* curo"
 			try {
 				render planItemsService.update(planId, productId, request.JSON) as JSON
 			} catch(e) {

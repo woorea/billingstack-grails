@@ -17,7 +17,7 @@ class CustomersService {
 	}
 
 	def list() {
-		Plan.list().collect { map(it) }
+		Customer.list().collect { map(it) }
 	}
 
 	def create(merchantId, entity) {

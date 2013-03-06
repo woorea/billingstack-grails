@@ -43,7 +43,7 @@ class PlanItemsService {
 				plan : Plan.load(planId),
 				product : Product.load(productId),
 			)
-			planItem.save(flush : true, failOnError : true).id
+			planItem.save(flush : true, failOnError : true)
 			entity.pricing.each { range ->
 				pricingService.create(planItem.id, range)
 			}

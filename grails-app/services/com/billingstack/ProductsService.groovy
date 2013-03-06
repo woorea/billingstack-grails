@@ -6,10 +6,11 @@ class ProductsService {
 		[
 			id : product.id,
 			merchant_id : product.merchant.id,
+			provider : product.provider,
+			source : product.source,
 			name : product.name,
 			title : product.title,
-			description : product.description,
-			provider : product.provider
+			description : product.description
 		]
 	}
 
@@ -20,10 +21,11 @@ class ProductsService {
 	def create(merchantId, entity) {
 		Product product = Product.newInstance(
 			merchant : Merchant.load(merchantId),
+			provider : entity.provider,
+			source : entity.source,
 			name : entity.name,
 			title : entity.title,
-			description : entity.description,
-			provider : entity.provider
+			description : entity.description
 		)
 		map(product.save(failOnError : true))
 	}

@@ -28,11 +28,8 @@ class PlansService {
 			name : entity.name,
 			title : entity.title,
 			description : entity.description
-		).save(flush : true, failOnError : true)
-		entity.items.each {
-			planItemsService.create(plan.id, it)
-		}
-		map(plan)
+		)
+		map(plan.save(flush : true, failOnError : true))
 	}
 
 	def show(String planId) {
